@@ -1,0 +1,13 @@
+extends layout
+
+block content
+  h1= 'Bienvenido a "A Garra Patas" PetShop'
+  p Welcome to #{title}
+  .myfirstDiv
+    label(htmlFor="user") Usuario
+    input(type="text" id="user" name="user" placeholder="p.e.GerardoVr" )
+    br
+    label(htmlFor="pwd") Contraseña
+    input(type="text" id="password" name="password" placeholder="*")
+    br
+    button(onClick= buttonOnClick) 'Iniciar sesion'
