@@ -1,20 +1,20 @@
 const userDAO = require('../models/usersDAO')
-const bcrypt = require('bcrypt')
+const bcrypt = require("bcrypt");
+const jwt = require('../utils/GenerateJWT')
 const usernameValidate = (req, res) => {
     userDAO.findByUsername(req.params.username, (data) =>{
-
         try {
-            if (!data) throw new Err("error en usuario")
+            if (!data) throw new Err("Usuario disponible")
 
             res.send({
                 status: true,
-                message: 'Usuario correcto'
+                message: 'Usuario ocupado'
             })
         }
         catch(Err) {
             res.send({
                 status: false,
-                message: 'error en usuario'
+                message: 'Usuario disponible'
             })
         }
     })
@@ -35,26 +35,56 @@ const getAllUsers = (req, res)=>{
         }
     )
 }
-const signup = (req, res)=>{
-    const user ={
-        nombre : req.body.nombre,
-        apellido: req.body.apellido,
-        username: req.body.username,
-        password: bcrypt.hash(req.body.password,10)
-    }
-    userDAO.insertUser(user, (data) =>{
-        console.log(data)
-            if(data && data.affectedRows == 1){
+const login = (req,res) => {
+    let username = req.body.username
+    let password = req.body.password
+    userDAO.findByUsername(username, (data) => {
+        if (data) {
+            console.log('Data =>',data)
+            if (bcrypt.compareSync(password, data.password)){
                 res.send({
-                    status: true, message: 'usuario creado exitosamente'
+                    status: true,
+                    message: 'Contraseña correcta',
+                    token: jwt.generateToken(data)
                 })
-            }else{
+            } else {
                 res.send({
-                    status: false, message:'ha ocurrido un error al crear el usuario'
+                    status: false,
+                    message: 'Contraseña incorrecta'
                 })
             }
+        } else {
+            res.send({
+                status: false,
+                message: 'La cuenta de usuario no existe'
+            })
         }
-    )
+    })
+}
+const signup = (req, res) => {
+    console.log('Signup => in')
+
+        const user = {
+            nombre : req.body.nombre,
+            apellido : req.body.apellido,
+            username : req.body.username,
+            password : bcrypt.hashSync(req.body.password,10)
+        }
+
+        userDAO.insertUser(user, (data) => {
+            res.send({
+                status: true,
+                message: 'Usuario creado exitosamente',
+                token: jwt.generateToken(data)
+            })
+        }, err => {
+            res.send({
+                status:false,
+                message: 'Ha ocurrido un error al crear la cuenta de usuario',
+                errorMessage: err
+            })
+        })
+
 }
 const deleteUser = (req, res)=>{
     userDAO.deleteUser(req.params.username, (data) =>{
@@ -75,5 +105,6 @@ module.exports = {
     usernameValidate,
     getAllUsers,
     signup,
-    deleteUser
+    deleteUser,
+    login
 }
