@@ -1,6 +1,7 @@
 const userDAO = require('../models/usersDAO')
 const bcrypt = require("bcrypt");
-const jwt = require('../utils/GenerateJWT')
+const jwt = require('../utils/GenerateJWT');
+
 const usernameValidate = (req, res) => {
     userDAO.findByUsername(req.params.username, (data) =>{
         try {
@@ -35,6 +36,7 @@ const getAllUsers = (req, res)=>{
         }
     )
 }
+
 const login = (req,res) => {
     let username = req.body.username
     let password = req.body.password
@@ -101,6 +103,8 @@ const deleteUser = (req, res)=>{
         }
     )
 }
+
+
 module.exports = {
     usernameValidate,
     getAllUsers,

@@ -1,6 +1,5 @@
-const bd = require('../configMysql')
-const bcrypt = require('bcrypt')
-const bycrypt = require("bcrypt");
+const bd = require('../configMysql');
+
 module.exports = {
     findByUsername : (username, callback) => {
         let sql = 'SELECT * FROM user WHERE username=?'
@@ -23,6 +22,7 @@ module.exports = {
                 callback(null)
         })
     },
+
     insertUser : (user, okCallback, failCallback) => {
         let sql = 'INSERT INTO user SET ?'
         bd.query(sql, user, (err, data) => {
@@ -31,6 +31,7 @@ module.exports = {
             else
                 return okCallback(data)
         })
+
     },
     deleteUser:(username,callback)=>{
         let sql = 'DELETE FROM user WHERE username=?'
@@ -40,5 +41,6 @@ module.exports = {
             else
                 return callback(data)
         })
-    }
+    },
+
 }
