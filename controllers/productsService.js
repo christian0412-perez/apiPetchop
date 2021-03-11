@@ -1,17 +1,20 @@
 const productDAO = require('../models/productsDAO')
-const bcrypt = require("bcrypt");
-const jwt = require('../utils/GenerateJWT');
+
 
 const getAllProducts = (req, res)=>{
     productDAO.getAllProducts(data =>{
             try{
-                if(!data) throw new Err("no hay usuarios")
+                if(!data) throw new Err("no hay productos")
+
                 res.send({
-                    status:false, body: data
+                    status:true,
+                    data: data
                 })
+
             }catch(Err){
                 res.send({
-                    status:false, message:"no existen usuarios"
+                    status:false,
+                    message:"no existen productos"
                 })
 
             }
@@ -32,7 +35,7 @@ const insertProduct = (req, res) => {
     productDAO.insertProduct(product, (data) => {
         res.send({
             status: true,
-            message: 'Usuario creado exitosamente',
+            message: 'producto registrado exitosamente',
 
         })
     }, err => {

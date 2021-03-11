@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
-const productsService = require('../controllers/productsService');
+const rolesService = require('../controllers/rolesService') //Cambiar
+
 const jwt = require('jsonwebtoken')
 const configuration = require('../ConfigServer')
 
@@ -21,7 +22,7 @@ router.use('/', (req, res, next) => {
     })
 })
 
-router.post('/insertProduct', productsService.insertProduct);
-router.get('/getAllProducts', productsService.getAllProducts);
+router.get('/getAllRoles',rolesService.getAllRoles);
 
 module.exports = router;
+
