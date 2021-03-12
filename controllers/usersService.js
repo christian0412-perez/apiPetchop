@@ -3,7 +3,7 @@ const bcrypt = require("bcrypt");
 const jwt = require('../utils/GenerateJWT');
 
 const usernameValidate = (req, res) => {
-    userDAO.findByUsername(req.params.username, (data) =>{
+    userDAO.findByUsername(req.params.username , (data) =>{
         try {
             if (!data) throw new Err("Usuario disponible")
 

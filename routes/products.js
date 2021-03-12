@@ -23,5 +23,7 @@ router.use('/', (req, res, next) => {
 
 router.post('/insertProduct', productsService.insertProduct);
 router.get('/getAllProducts', productsService.getAllProducts);
-
+router.get('/getAllCategory/:categoria', productsService.getAllCategory);
+router.get('/getAllPet/:tipoMascota', productsService.getAllPet);
+router.get('/getAllSpecification', productsService.getAllSpecification);
 module.exports = router;

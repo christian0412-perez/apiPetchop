@@ -1,8 +1,78 @@
 const productDAO = require('../models/productsDAO')
 
 
-const getAllProducts = (req, res)=>{
+const getAllProducts = (req, res) =>  {
     productDAO.getAllProducts(data =>{
+            try{
+                if(!data) throw new Err("no hay productos")
+
+                res.send({
+                    status:true,
+                    data: data
+                })
+
+            }catch(Err){
+                res.send({
+                    status:false,
+                    message:"no existen productos"
+                })
+
+            }
+        }
+    )
+}
+
+const getAllCategory = (req, res) => {
+    productDAO.findByCategory(req.params.categoria , (data) =>{
+            try{
+                if(!data) throw new Err("no hay productos")
+
+                res.send({
+                    status:true,
+                    data: data
+                })
+
+            }catch(Err){
+                res.send({
+                    status:false,
+                    message:"no existen productos"
+                })
+
+            }
+        }
+    )
+}
+
+const getAllPet = (req, res) => {
+    productDAO.findByPet(req.params.tipoMascota , (data) =>{
+            try{
+                if(!data) throw new Err("no hay productos")
+
+                res.send({
+                    status:true,
+                    data: data
+                })
+
+            }catch(Err){
+                res.send({
+                    status:false,
+                    message:"no existen productos"
+                })
+
+            }
+        }
+    )
+}
+
+const getAllSpecification = (req, res) => {
+
+    const espec = {
+        categoria: req.data.categoria,
+        tipoMascota: req.data.tipoMascota
+    }
+
+
+    productDAO.findBySpecification( espec , (data) =>{
             try{
                 if(!data) throw new Err("no hay productos")
 
@@ -66,5 +136,8 @@ const deleteProduct = (req, res)=>{
 
 module.exports = {
     getAllProducts,
-    insertProduct
+    insertProduct,
+    getAllCategory,
+    getAllPet,
+    getAllSpecification
 }

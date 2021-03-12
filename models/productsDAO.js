@@ -12,6 +12,7 @@ module.exports = {
                 callback(null)
         })
     },
+
     getAllProducts:(callback)=>{
         let sql = 'SELECT * FROM productos'
         bd.query(sql,(err,data) => {
@@ -22,6 +23,68 @@ module.exports = {
                 callback(null)
         })
     },
+
+    findByPet:(tipoMascota, callback)=>{
+        let sql = 'SELECT * FROM productos WHERE tipoMascota=?'
+        bd.query(sql, tipoMascota, (err,data) => {
+            if (err) throw err
+
+            if (data.length>0)
+                callback(data)
+            else
+                callback(null)
+        })
+    },
+
+    findBySpecification:(espec, callback)=>{
+        let sql = `SELECT * FROM productos WHERE categoria=${espec.categoria} and WHERE tipoMascota=${espec.tipoMascota}`
+        bd.query(sql, espec, (err,data) => {
+            if (err) throw err
+
+            if (data.length>0)
+                callback(data)
+            else
+                callback(null)
+        })
+    },
+
+    findByEspecs:(tipoMascota,categoria, callback)=>{
+        let sql = 'SELECT * FROM productos WHERE tipoMascota=?'
+        bd.query(sql, tipoMascota, (err,data) => {
+            if (err) throw err
+
+            if (data.length>0){
+
+                    let sql = `SELECT * FROM productos WHERE categoria=${categoria}`
+                    bd.query(sql, categoria, (err,data) => {
+                        if (err) throw err
+
+                        if (data.length>0)
+                            callback(data)
+                        else
+                            callback(null)
+                    })
+                }
+
+
+            else
+                callback(null)
+        })
+    },
+
+    findByCategory:(categoria, callback)=>{
+        let sql = 'SELECT * FROM productos WHERE categoria=?'
+        bd.query(sql, categoria, (err,data) => {
+            if (err) throw err
+
+            if (data.length>0)
+                callback(data)
+            else
+                callback(null)
+        })
+    },
+
+
 
     deleteProduct:(productName,callback)=>{
         let sql = 'DELETE FROM productos WHERE Nombre=?'

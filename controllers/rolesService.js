@@ -1,4 +1,4 @@
-const rolesDAO = require('../models/rolesDAO')
+ const rolesDAO = require('../models/rolesDAO')
 
 const getAllRoles = (req,res) => {
     rolesDAO.getAllRoles((data) =>{
