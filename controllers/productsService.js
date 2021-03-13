@@ -64,15 +64,50 @@ const getAllPet = (req, res) => {
     )
 }
 
-const getAllSpecification = (req, res) => {
+const getAllAboutDogs = (req, res) => {
+    productDAO.findByDogs(req.params.categoria, (data) =>{
+            try{
+                if(!data) throw new Err("no hay productos")
 
-    const espec = {
-        categoria: req.data.categoria,
-        tipoMascota: req.data.tipoMascota
-    }
+                res.send({
+                    status:true,
+                    data: data
+                })
 
+            }catch(Err){
+                res.send({
+                    status:false,
+                    message:"no existen productos"
+                })
 
-    productDAO.findBySpecification( espec , (data) =>{
+            }
+        }
+    )
+}
+
+const getAllAboutCats = (req, res) => {
+    productDAO.findByCats(req.params.categoria, (data) =>{
+            try{
+                if(!data) throw new Err("no hay productos")
+
+                res.send({
+                    status:true,
+                    data: data
+                })
+
+            }catch(Err){
+                res.send({
+                    status:false,
+                    message:"no existen productos"
+                })
+
+            }
+        }
+    )
+}
+
+const getAllAboutOthers = (req, res) => {
+    productDAO.findByOthers(req.params.categoria, (data) =>{
             try{
                 if(!data) throw new Err("no hay productos")
 
@@ -139,5 +174,7 @@ module.exports = {
     insertProduct,
     getAllCategory,
     getAllPet,
-    getAllSpecification
+    getAllAboutDogs,
+    getAllAboutCats,
+    getAllAboutOthers
 }

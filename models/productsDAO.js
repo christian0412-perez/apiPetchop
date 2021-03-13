@@ -36,42 +36,6 @@ module.exports = {
         })
     },
 
-    findBySpecification:(espec, callback)=>{
-        let sql = `SELECT * FROM productos WHERE categoria=${espec.categoria} and WHERE tipoMascota=${espec.tipoMascota}`
-        bd.query(sql, espec, (err,data) => {
-            if (err) throw err
-
-            if (data.length>0)
-                callback(data)
-            else
-                callback(null)
-        })
-    },
-
-    findByEspecs:(tipoMascota,categoria, callback)=>{
-        let sql = 'SELECT * FROM productos WHERE tipoMascota=?'
-        bd.query(sql, tipoMascota, (err,data) => {
-            if (err) throw err
-
-            if (data.length>0){
-
-                    let sql = `SELECT * FROM productos WHERE categoria=${categoria}`
-                    bd.query(sql, categoria, (err,data) => {
-                        if (err) throw err
-
-                        if (data.length>0)
-                            callback(data)
-                        else
-                            callback(null)
-                    })
-                }
-
-
-            else
-                callback(null)
-        })
-    },
-
     findByCategory:(categoria, callback)=>{
         let sql = 'SELECT * FROM productos WHERE categoria=?'
         bd.query(sql, categoria, (err,data) => {
@@ -84,7 +48,41 @@ module.exports = {
         })
     },
 
+    findByDogs:(categoria, callback)=>{
+        let sql = 'SELECT * FROM productos WHERE tipoMascota="perros" and categoria=?'
+        bd.query(sql, categoria, (err,data) => {
+            if (err) throw err
 
+            if (data.length>0)
+                callback(data)
+            else
+                callback(null)
+        })
+    },
+
+    findByCats:(categoria, callback)=>{
+        let sql = 'SELECT * FROM productos WHERE tipoMascota="gatos" and categoria=?'
+        bd.query(sql, categoria, (err,data) => {
+            if (err) throw err
+
+            if (data.length>0)
+                callback(data)
+            else
+                callback(null)
+        })
+    },
+
+    findByOthers:(categoria, callback)=>{
+        let sql = 'SELECT * FROM productos WHERE tipoMascota="otros" and categoria=?'
+        bd.query(sql, categoria, (err,data) => {
+            if (err) throw err
+
+            if (data.length>0)
+                callback(data)
+            else
+                callback(null)
+        })
+    },
 
     deleteProduct:(productName,callback)=>{
         let sql = 'DELETE FROM productos WHERE Nombre=?'
