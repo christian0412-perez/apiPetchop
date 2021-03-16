@@ -1,7 +1,9 @@
 const productDAO = require('../models/productsDAO')
+const bcrypt = require("bcrypt");
+const jwt = require('../utils/GenerateJWT');
 
 const productValidate = (req, res) => {
-    productDAO.findByProductName(req.params.productName , (data) =>{
+    productDAO.findByProductName(req.params.nameProduct , (data) =>{
         try {
             if (!data) throw new Err("nombre disponible")
 
@@ -148,7 +150,7 @@ const getAllAboutOthers = (req, res) => {
 const insertProduct = (req, res) => {
 
     const product = {
-        idCategoria : req.body.idCategoria,
+        idCategory : req.body.idCategory,
         nameProduct : req.body.nameProduct,
         price : req.body.price,
         quantity : req.body.quantity,
@@ -164,7 +166,7 @@ const insertProduct = (req, res) => {
     }, err => {
         res.send({
             status:false,
-            message: 'Ha ocurrido un error al crear la cuenta de usuario',
+            message: 'Ha ocurrido un error al crear  producto',
             errorMessage: err
         })
     })

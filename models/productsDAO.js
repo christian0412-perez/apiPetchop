@@ -1,9 +1,9 @@
 const bd = require('../configMysql');
 
 module.exports = {
-    findByProductName : (productName, callback) => {
-        let sql = 'SELECT * FROM productos WHERE nombre=?'
-        bd.query(sql,productName, (err, data) => {
+    findByProductName : (nameProduct, callback) => {
+        let sql = 'SELECT * FROM productos WHERE nameProduct=?'
+        bd.query(sql,nameProduct, (err, data) => {
             if (err) throw err
 
             if (data.length>0)
@@ -12,6 +12,7 @@ module.exports = {
                 callback(null)
         })
     },
+
 
     getAllProducts:(callback)=>{
         let sql = 'SELECT * FROM productos'
