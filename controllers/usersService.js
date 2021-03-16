@@ -47,7 +47,8 @@ const login = (req,res) => {
                 res.send({
                     status: true,
                     message: 'Contraseña correcta',
-                    token: jwt.generateToken(data)
+                    token: jwt.generateToken(data),
+
                 })
             } else {
                 res.send({
@@ -67,6 +68,7 @@ const signup = (req, res) => {
     console.log('Signup => in')
 
         const user = {
+            idRol : req.body.idRol,
             nombre : req.body.nombre,
             apellido : req.body.apellido,
             username : req.body.username,

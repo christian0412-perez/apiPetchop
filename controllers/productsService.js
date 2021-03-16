@@ -1,5 +1,23 @@
 const productDAO = require('../models/productsDAO')
 
+const productValidate = (req, res) => {
+    productDAO.findByProductName(req.params.productName , (data) =>{
+        try {
+            if (!data) throw new Err("Usuario disponible")
+
+            res.send({
+                status: true,
+                message: 'Usuario ocupado'
+            })
+        }
+        catch(Err) {
+            res.send({
+                status: false,
+                message: 'Usuario disponible'
+            })
+        }
+    })
+}
 
 const getAllProducts = (req, res) =>  {
     productDAO.getAllProducts(data =>{
