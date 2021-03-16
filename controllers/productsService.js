@@ -3,17 +3,17 @@ const productDAO = require('../models/productsDAO')
 const productValidate = (req, res) => {
     productDAO.findByProductName(req.params.productName , (data) =>{
         try {
-            if (!data) throw new Err("Usuario disponible")
+            if (!data) throw new Err("nombre disponible")
 
             res.send({
                 status: true,
-                message: 'Usuario ocupado'
+                message: 'nombre ocupado'
             })
         }
         catch(Err) {
             res.send({
                 status: false,
-                message: 'Usuario disponible'
+                message: 'nombre disponible'
             })
         }
     })
@@ -148,11 +148,11 @@ const getAllAboutOthers = (req, res) => {
 const insertProduct = (req, res) => {
 
     const product = {
-
-        nombre : req.body.nombre,
-        precio : req.body.precio,
-        cantidad : req.body.cantidad
-
+        idCategoria : req.body.idCategoria,
+        nameProduct : req.body.nameProduct,
+        price : req.body.price,
+        quantity : req.body.quantity,
+        petType : req.body.petType
     }
 
     productDAO.insertProduct(product, (data) => {
@@ -188,6 +188,7 @@ const deleteProduct = (req, res)=>{
 
 
 module.exports = {
+    productValidate,
     getAllProducts,
     insertProduct,
     getAllCategory,

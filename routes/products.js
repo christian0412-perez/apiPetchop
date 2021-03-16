@@ -22,6 +22,7 @@ router.use('/', (req, res, next) => {
 })
 
 router.post('/insertProduct', productsService.insertProduct);
+router.post('/productValidate/:', productsService.productValidate);
 router.get('/getAllProducts', productsService.getAllProducts);
 router.get('/getAllCategory/:categoria', productsService.getAllCategory);
 router.get('/getAllPet/:tipoMascota', productsService.getAllPet);

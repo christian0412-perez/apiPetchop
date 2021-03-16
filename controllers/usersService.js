@@ -68,11 +68,12 @@ const signup = (req, res) => {
     console.log('Signup => in')
 
         const user = {
-            idRol : req.body.idRol,
-            nombre : req.body.nombre,
-            apellido : req.body.apellido,
-            username : req.body.username,
-            password : bcrypt.hashSync(req.body.password,10)
+
+            idRol: req.body.idRol,
+            nombre: req.body.nombre,
+            apellido: req.body.apellido,
+            username: req.body.username,
+            password: bcrypt.hashSync(req.body.password, 10)
         }
 
         userDAO.insertUser(user, (data) => {
@@ -83,12 +84,11 @@ const signup = (req, res) => {
             })
         }, err => {
             res.send({
-                status:false,
+                status: false,
                 message: 'Ha ocurrido un error al crear la cuenta de usuario',
                 errorMessage: err
             })
         })
-
 }
 const deleteUser = (req, res)=>{
     userDAO.deleteUser(req.params.username, (data) =>{
