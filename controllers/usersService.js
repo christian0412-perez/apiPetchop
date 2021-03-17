@@ -8,6 +8,7 @@ const usernameValidate = (req, res) => {
             if (!data) throw new Err("Usuario disponible")
 
             res.send({
+                idRol: data.idRol,
                 status: true,
                 message: 'Usuario ocupado'
             })
@@ -45,6 +46,7 @@ const login = (req,res) => {
             console.log('Data =>',data)
             if (bcrypt.compareSync(password, data.password)){
                 res.send({
+
                     status: true,
                     message: 'Contraseña correcta',
                     token: jwt.generateToken(data),
