@@ -25,9 +25,9 @@ module.exports = {
         })
     },
 
-    findByPet:(tipoMascota, callback)=>{
+    findByPet:(petType, callback)=>{
         let sql = 'SELECT * FROM productos WHERE petType=?'
-        bd.query(sql, tipoMascota, (err,data) => {
+        bd.query(sql, petType, (err,data) => {
             if (err) throw err
 
             if (data.length>0)
@@ -38,7 +38,7 @@ module.exports = {
     },
 
     findByCategory:(categoria, callback)=>{
-        let sql = 'SELECT * FROM productos WHERE categoria=?'
+        let sql = 'SELECT * FROM productos WHERE idCategory=?'
         bd.query(sql, categoria, (err,data) => {
             if (err) throw err
 
@@ -62,7 +62,7 @@ module.exports = {
     },
 
     findByCats:(categoria, callback)=>{
-        let sql = 'SELECT * FROM productos WHERE petType="gatos" and categoria=?'
+        let sql = 'SELECT * FROM productos WHERE petType="gatos" and idCategory=?'
         bd.query(sql, categoria, (err,data) => {
             if (err) throw err
 
@@ -74,7 +74,7 @@ module.exports = {
     },
 
     findByOthers:(categoria, callback)=>{
-        let sql = 'SELECT * FROM productos WHERE petType="otros" and categoria=?'
+        let sql = 'SELECT * FROM productos WHERE petType="otros" and idCategory=?'
         bd.query(sql, categoria, (err,data) => {
             if (err) throw err
 
@@ -85,13 +85,18 @@ module.exports = {
         })
     },
 
-    deleteProduct:(productName,callback)=>{
-        let sql = 'DELETE FROM productos WHERE Nombre=?'
-        bd.query(sql, productName,(err,data) => {
-            if (err)
-                return callback(null)
-            else
+    deleteProduct:(idProducto,callback)=>{
+        let sql = 'DELETE FROM productos WHERE idProducto=?'
+        bd.query(sql,idProducto, (err, data) => {
+            console.log("err =>",err)
+            console.log("data =>",data)
+            try {
+                if (err) throw new Err('Error en la eliminación')
                 return callback(data)
+            }
+            catch (Err) {
+                return callback(null)
+            }
         })
     },
 

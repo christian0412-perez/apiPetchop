@@ -64,7 +64,7 @@ const getAllCategory = (req, res) => {
 }
 
 const getAllPet = (req, res) => {
-    productDAO.findByPet(req.params.tipoMascota , (data) =>{
+    productDAO.findByPet(req.params.petType , (data) =>{
             try{
                 if(!data) throw new Err("no hay productos")
 
@@ -173,17 +173,21 @@ const insertProduct = (req, res) => {
 }
 
 const deleteProduct = (req, res)=>{
-    productDAO.deleteProduct(req.params.nameProduct, (data) =>{
-            console.log(data)
-            if(data && data.affectedRows === 1){
-                res.send({
-                    status: true, message: 'usuario creado exitosamente'
-                })
-            }else{
-                res.send({
-                    status: false, message:'ha ocurrido un error al crear el usuario'
-                })
-            }
+    productDAO.deleteProduct(req.params.idProducto, (data) =>{
+        try {
+            if (!data) throw new Err("Hubo un error en el proceso")
+            if (data.affectedRows === 0) throw new Err(`Falló la eliminación del idProducto: ${req.params.idProducto}`)
+            res.send({
+                status: true,
+                message: `Eliminación de idProducto: ${req.params.idProducto} fue exitosa`
+            })
+        }
+        catch (Err) {
+            res.send({
+                status: false,
+                message: '<La eliminacion fracaso'
+            })
+        }
         }
     )
 }
@@ -197,5 +201,6 @@ module.exports = {
     getAllPet,
     getAllAboutDogs,
     getAllAboutCats,
-    getAllAboutOthers
+    getAllAboutOthers,
+    deleteProduct
 }

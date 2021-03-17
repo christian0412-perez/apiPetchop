@@ -24,9 +24,9 @@ router.use('/', (req, res, next) => {
 router.post('/insertProduct', productsService.insertProduct);
 router.get('/productValidate/:nameProduct', productsService.productValidate);
 router.get('/getAllProducts', productsService.getAllProducts);
-router.get('/getAllCategory/:categoria', productsService.getAllCategory);
-router.get('/getAllPet/:tipoMascota', productsService.getAllPet);
+router.get('/getAllCategory/:idCategory', productsService.getAllCategory);
+router.get('/getAllPet/:petType', productsService.getAllPet);
 router.get('/getAllAboutDogs/:idCategory', productsService.getAllAboutDogs);
-router.get('/getAllAboutCats/:categoria', productsService.getAllAboutCats);
-router.get('/getAllAboutOthers/:categoria', productsService.getAllAboutOthers);
+router.get('/getAllAboutCats/:idCategory', productsService.getAllAboutCats);
+router.post('/deleteProduct/:idProducto', productsService.deleteProduct);
 module.exports = router;
