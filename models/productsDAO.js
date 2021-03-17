@@ -26,7 +26,7 @@ module.exports = {
     },
 
     findByPet:(tipoMascota, callback)=>{
-        let sql = 'SELECT * FROM productos WHERE tipoMascota=?'
+        let sql = 'SELECT * FROM productos WHERE petType=?'
         bd.query(sql, tipoMascota, (err,data) => {
             if (err) throw err
 
@@ -49,9 +49,9 @@ module.exports = {
         })
     },
 
-    findByDogs:(categoria, callback)=>{
-        let sql = 'SELECT * FROM productos WHERE tipoMascota="perros" and categoria=?'
-        bd.query(sql, categoria, (err,data) => {
+    findByDogs:(idCategory, callback)=>{
+        let sql = 'SELECT * FROM productos WHERE petType="perros" and idCategory=?'
+        bd.query(sql, idCategory, (err,data) => {
             if (err) throw err
 
             if (data.length>0)
@@ -62,7 +62,7 @@ module.exports = {
     },
 
     findByCats:(categoria, callback)=>{
-        let sql = 'SELECT * FROM productos WHERE tipoMascota="gatos" and categoria=?'
+        let sql = 'SELECT * FROM productos WHERE petType="gatos" and categoria=?'
         bd.query(sql, categoria, (err,data) => {
             if (err) throw err
 
@@ -74,7 +74,7 @@ module.exports = {
     },
 
     findByOthers:(categoria, callback)=>{
-        let sql = 'SELECT * FROM productos WHERE tipoMascota="otros" and categoria=?'
+        let sql = 'SELECT * FROM productos WHERE petType="otros" and categoria=?'
         bd.query(sql, categoria, (err,data) => {
             if (err) throw err
 

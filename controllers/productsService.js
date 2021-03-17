@@ -85,7 +85,7 @@ const getAllPet = (req, res) => {
 }
 
 const getAllAboutDogs = (req, res) => {
-    productDAO.findByDogs(req.params.categoria, (data) =>{
+    productDAO.findByDogs(req.params.idCategory, (data) =>{
             try{
                 if(!data) throw new Err("no hay productos")
 
@@ -106,7 +106,7 @@ const getAllAboutDogs = (req, res) => {
 }
 
 const getAllAboutCats = (req, res) => {
-    productDAO.findByCats(req.params.categoria, (data) =>{
+    productDAO.findByCats(req.params.idCategory, (data) =>{
             try{
                 if(!data) throw new Err("no hay productos")
 
@@ -127,7 +127,7 @@ const getAllAboutCats = (req, res) => {
 }
 
 const getAllAboutOthers = (req, res) => {
-    productDAO.findByOthers(req.params.categoria, (data) =>{
+    productDAO.findByOthers(req.params.idCategory, (data) =>{
             try{
                 if(!data) throw new Err("no hay productos")
 
@@ -148,7 +148,7 @@ const getAllAboutOthers = (req, res) => {
 }
 
 const insertProduct = (req, res) => {
-
+    console.log('Signup => in')
     const product = {
         idCategory : req.body.idCategory,
         nameProduct : req.body.nameProduct,
@@ -173,9 +173,9 @@ const insertProduct = (req, res) => {
 }
 
 const deleteProduct = (req, res)=>{
-    productDAO.deleteUser(req.params.nombre, (data) =>{
+    productDAO.deleteProduct(req.params.nameProduct, (data) =>{
             console.log(data)
-            if(data && data.affectedRows == 1){
+            if(data && data.affectedRows === 1){
                 res.send({
                     status: true, message: 'usuario creado exitosamente'
                 })

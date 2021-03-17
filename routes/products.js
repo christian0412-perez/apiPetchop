@@ -26,7 +26,7 @@ router.get('/productValidate/:nameProduct', productsService.productValidate);
 router.get('/getAllProducts', productsService.getAllProducts);
 router.get('/getAllCategory/:categoria', productsService.getAllCategory);
 router.get('/getAllPet/:tipoMascota', productsService.getAllPet);
-router.get('/getAllAboutDogs/:categoria', productsService.getAllAboutDogs);
+router.get('/getAllAboutDogs/:idCategory', productsService.getAllAboutDogs);
 router.get('/getAllAboutCats/:categoria', productsService.getAllAboutCats);
 router.get('/getAllAboutOthers/:categoria', productsService.getAllAboutOthers);
 module.exports = router;
