@@ -29,4 +29,5 @@ router.get('/getAllPet/:petType', productsService.getAllPet);
 router.get('/getAllAboutDogs/:idCategory', productsService.getAllAboutDogs);
 router.get('/getAllAboutCats/:idCategory', productsService.getAllAboutCats);
 router.post('/deleteProduct/:idProducto', productsService.deleteProduct);
+router.get('/productSearch/:nameProduct', productsService.productSearch);
 module.exports = router;

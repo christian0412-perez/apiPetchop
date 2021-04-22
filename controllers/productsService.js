@@ -21,6 +21,26 @@ const productValidate = (req, res) => {
     })
 }
 
+const productSearch = (req, res) => {
+    productDAO.findByProductName(req.params.nameProduct , (data) =>{
+        try {
+            if (!data) throw new Err("encontrado")
+
+            res.send({
+                status: true,
+                data: data,
+                message: 'producto encontrado'
+            })
+        }
+        catch(Err) {
+            res.send({
+                status: false,
+                message: 'producto no encontrado'
+            })
+        }
+    })
+}
+
 const getAllProducts = (req, res) =>  {
     productDAO.getAllProducts(data =>{
             try{
@@ -202,5 +222,6 @@ module.exports = {
     getAllAboutDogs,
     getAllAboutCats,
     getAllAboutOthers,
-    deleteProduct
+    deleteProduct,
+    productSearch
 }
