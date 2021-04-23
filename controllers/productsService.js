@@ -196,14 +196,14 @@ const insertProductSell = (req, res) => {
 
     console.log('Signup => in')
     const product = {
-        idCategory : req.body.idCategory,
+
         nameProduct : req.body.nameProduct,
         price : req.body.price,
-        quantity : req.body.quantity,
-        petType : req.body.petType
+        quantitySold: req.body.quantitySold
+
     }
 
-    productDAO.insertProduct(product, (data) => {
+    productDAO.insertProductSell(product, (data) => {
         res.send({
             status: true,
             message: 'producto vendido exitosamente',
@@ -238,6 +238,32 @@ const deleteProduct = (req, res)=>{
     )
 }
 
+const updateProduct = (req, res) => {
+
+    console.log('Signup => in')
+    const idProducto = {
+        idProducto : req.body.idProducto,
+    }
+
+    const  quantity = {
+        quantity : req.body.quantity,
+    }
+
+    productDAO.updateProducto(quantity, idProducto, (data) => {
+        res.send({
+            status: true,
+            message: 'producto actualizado correctamente',
+
+        })
+    }, err => {
+        res.send({
+            status:false,
+            message: 'ni modo mano no se pudo actualizar',
+            errorMessage: err
+        })
+    })
+}
+
 
 module.exports = {
     productValidate,
@@ -250,5 +276,6 @@ module.exports = {
     getAllAboutOthers,
     deleteProduct,
     productSearch,
-    insertProductSell
+    insertProductSell,
+    updateProduct
 }

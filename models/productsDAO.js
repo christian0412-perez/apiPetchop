@@ -13,7 +13,6 @@ module.exports = {
         })
     },
 
-
     getAllProducts:(callback)=>{
         let sql = 'SELECT * FROM productos'
         bd.query(sql,(err,data) => {
@@ -113,6 +112,16 @@ module.exports = {
     insertProductSell : (product, okCallback, failCallback) => {
         let sql = 'INSERT INTO ventas SET ?'
         bd.query(sql, product, (err, data) => {
+            if (err)
+                return failCallback(err)
+            else
+                return okCallback(data)
+        })
+    },
+
+    updateProducto : (quantity, idProducto, okCallback, failCallback) => {
+        let sql = 'UPDATE productos SET quantity = ? WHERE idProducto = ?'
+        bd.query(sql, quantity, (err, data) => {
             if (err)
                 return failCallback(err)
             else
