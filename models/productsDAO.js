@@ -120,7 +120,7 @@ module.exports = {
     },
 
     updateProducto : (quantity, idProducto, okCallback, failCallback) => {
-        let sql = 'UPDATE productos SET quantity = ? WHERE idProducto = ?'
+        let sql = `UPDATE productos SET quantity = ${quantity.quantity} WHERE idProducto = ${idProducto.idProducto}`
         bd.query(sql, quantity, (err, data) => {
             if (err)
                 return failCallback(err)

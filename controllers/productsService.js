@@ -242,14 +242,14 @@ const updateProduct = (req, res) => {
 
     console.log('Signup => in')
     const idProducto = {
-        idProducto : req.body.idProducto,
+        idProducto : req.body.idProducto
     }
 
     const  quantity = {
-        quantity : req.body.quantity,
+        quantity : req.body.quantity
     }
 
-    productDAO.updateProducto(quantity, idProducto, (data) => {
+    productDAO.updateProducto( quantity, idProducto,(data) => {
         res.send({
             status: true,
             message: 'producto actualizado correctamente',
