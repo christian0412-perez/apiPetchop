@@ -108,5 +108,15 @@ module.exports = {
             else
                 return okCallback(data)
         })
+    },
+
+    insertProductSell : (product, okCallback, failCallback) => {
+        let sql = 'INSERT INTO ventas SET ?'
+        bd.query(sql, product, (err, data) => {
+            if (err)
+                return failCallback(err)
+            else
+                return okCallback(data)
+        })
     }
 }

@@ -192,6 +192,32 @@ const insertProduct = (req, res) => {
     })
 }
 
+const insertProductSell = (req, res) => {
+
+    console.log('Signup => in')
+    const product = {
+        idCategory : req.body.idCategory,
+        nameProduct : req.body.nameProduct,
+        price : req.body.price,
+        quantity : req.body.quantity,
+        petType : req.body.petType
+    }
+
+    productDAO.insertProduct(product, (data) => {
+        res.send({
+            status: true,
+            message: 'producto vendido exitosamente',
+
+        })
+    }, err => {
+        res.send({
+            status:false,
+            message: 'ni modo mano no se pudo vender',
+            errorMessage: err
+        })
+    })
+}
+
 const deleteProduct = (req, res)=>{
     productDAO.deleteProduct(req.params.idProducto, (data) =>{
         try {
@@ -223,5 +249,6 @@ module.exports = {
     getAllAboutCats,
     getAllAboutOthers,
     deleteProduct,
-    productSearch
+    productSearch,
+    insertProductSell
 }
