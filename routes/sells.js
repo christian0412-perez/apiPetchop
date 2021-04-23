@@ -22,5 +22,7 @@ router.use('/', (req, res, next) => {
 })
 
 router.get('/getAllVentas', sellsService.getAllVentas);
+router.post('/truncTable', sellsService.truncTable );
+router.post('/deleteSell/:idVenta', sellsService.deleteSell);
 
 module.exports = router;

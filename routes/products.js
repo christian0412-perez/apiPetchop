@@ -31,5 +31,5 @@ router.get('/getAllAboutCats/:idCategory', productsService.getAllAboutCats);
 router.post('/deleteProduct/:idProducto', productsService.deleteProduct);
 router.get('/productSearch/:nameProduct', productsService.productSearch);
 router.post('/insertProductSell', productsService.insertProductSell);
-router.put('/updateProduct', productsService.updateProduct);
+router.post('/updateProduct', productsService.updateProduct);
 module.exports = router;
